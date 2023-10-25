@@ -1,0 +1,264 @@
+"Games"
+{
+	"tf"
+	{
+		"Functions"
+		{
+			"CBaseObject::SetModel()"
+			{
+				"offset"		"CBaseObject::SetModel()"
+				"hooktype"		"entity"
+				"return"		"void"
+				"this"			"entity"
+				"arguments"
+				{
+					"pModel"
+					{
+						"type"	"charptr"
+					}
+				}
+			}
+			"CBaseObject::OnGoActive()"
+			{
+				"offset"		"CBaseObject::OnGoActive()"
+				"hooktype"		"entity"
+				"return"		"void"
+				"this"			"entity"
+			}
+			"CBaseObject::StartUpgrading()"
+			{
+				"offset"		"CBaseObject::StartUpgrading()"
+				"hooktype"		"entity"
+				"return"		"void"
+				"this"			"entity"
+			}
+			"CBaseObject::FinishUpgrading()"
+			{
+				"offset"		"CBaseObject::FinishUpgrading()"
+				"hooktype"		"entity"
+				"return"		"void"
+				"this"			"entity"
+			}
+			"CBaseObject::GetMaxHealthForCurrentLevel()"
+			{
+				"offset"		"CBaseObject::GetMaxHealthForCurrentLevel()"
+				"hooktype"		"entity"
+				"return"		"int"
+				"this"			"entity"
+			}
+			"CObjectDispenser::StopHealing()"
+			{
+				"signature"		"CObjectDispenser::StopHealing()"
+				"callconv"		"thiscall"
+				"return"		"void"
+				"this"			"entity"
+				"arguments"
+				{
+					"pOther"
+					{
+						"type"	"cbaseentity"
+					}
+				}
+			}
+			"CObjectDispenser::StartHealing()"
+			{
+				"offset"		"CObjectDispenser::StartHealing()"
+				"hooktype"		"entity"
+				"return"		"void"
+				"this"			"entity"
+				"arguments"
+				{
+					"pOther"
+					{
+						"type"	"cbaseentity"
+					}
+				}
+			}
+			"CTFPlayerShared::CalculateObjectCost()"
+			{
+				"signature"		"CTFPlayerShared::CalculateObjectCost()"
+				"callconv"		"thiscall"
+				"return"		"int"
+				"this"			"address"
+				"arguments"
+				{
+					"player"
+					{
+						"type"	"cbaseentity"
+					}
+					"type"
+					{
+						"type"	"int"
+					}
+				}
+			}
+			"CBaseObject::GetConstructionMultiplier()"
+			{
+				"signature" "CBaseObject::GetConstructionMultiplier()"
+				"callconv"  "thiscall"
+				"return"    "float"
+				"this"      "entity"
+			}
+			"CObjectDispenser::GetHealRate()"
+			{
+				"offset"		"CObjectDispenser::GetHealRate()"
+				"hooktype"		"entity"
+				"return"		"float"
+				"this"			"entity"
+			}
+			"CObjectDispenser::CouldHealTarget"
+			{
+				"signature"	"CObjectDispenser::CouldHealTarget"
+				"callconv"	"thiscall"
+				"return"	"bool"
+				"this"		"entity"
+				"arguments"
+				{
+					"target"
+					{
+						"type"	"cbaseentity"
+					}
+				}
+			}
+			"CObjectSentrygun::ValidTargetPlayer"
+			{
+				"signature"	"CObjectSentrygun::ValidTargetPlayer"
+				"callconv"	"thiscall"
+				"return"	"bool"
+				"this"		"entity"
+				"arguments"
+				{
+					"pPlayer"
+					{
+						"type"	"cbaseentity"
+					}
+					"vecStart"
+					{
+						"type"	"vectorptr"
+					}
+					"vecEnd"
+					{
+						"type"	"vectorptr"
+					}
+				}
+			}
+		}
+
+		"Signatures"
+		{
+			"CObjectDispenser::StopHealing()"
+			{
+				// first call in "CObjectDispenser::ResetHealingTargets()", second call in "CObjectDispenser::DispenseThink()" that include "DispenseContext"
+				"library"	"server"
+				"linux"		"@_ZN16CObjectDispenser11StopHealingEP11CBaseEntity"
+				"windows"	"\x55\x8B\xEC\x53\x8B\x5D\x08\x57\x53\x8B\xF9\xE8\x2A\x2A\x2A\x2A\x84\xC0"
+			}
+			"CTFPlayerShared::CalculateObjectCost()"
+			{
+				// unique x-ref to string "mod_teleporter_cost"
+				"library"	"server"
+				"linux"		"@_ZN15CTFPlayerShared19CalculateObjectCostEP9CTFPlayeri"
+				"windows"	"\x55\x8B\xEC\xA1\x2A\x2A\x2A\x2A\x85\xC0\x74\x2A\x80\xB8\x72\x0C\x00\x00\x00\x74\x2A\x80\xB8\xD1\x03\x00\x00\x00"
+			}
+			"CTFPlayer::DetonateObjectOfType()"
+			{
+				// unique x-ref to string "object_removed"
+				"library"	"server"
+				"linux"		"@_ZN9CTFPlayer20DetonateObjectOfTypeEiib"
+				"windows"	"\x55\x8B\xEC\x51\x53\x57\xFF\x75\x0C\x8B\xD9\xFF\x75\x08\x89\x5D\xFC\xE8\x2A\x2A\x2A\x2A\x8B\xF8"
+			}
+			"CTFPlayer::GetObjectOfType()"
+			{
+				// first call in "CTFPlayer::DetonateObjectOfType()"
+				"library"	"server"
+				"linux"		"@_ZNK9CTFPlayer15GetObjectOfTypeEii"
+				"windows"	"\x55\x8B\xEC\x51\x53\x8B\xC1\x56\x57\x33\xFF\x89\x45\xFC\x8B\x98\x44\x23\x00\x00"
+			}
+			"CBaseObject::DestroyScreens()"
+			{
+				// second call in "CBaseObject::MakeCarriedObject( CTFPlayer *pCarrier )", not in if-else if.
+				"library"	"server"
+				"linux"		"@_ZN11CBaseObject14DestroyScreensEv"
+				"windows"	"\x56\x57\x8B\xF9\x8B\xB7\xEC\x09\x00\x00"
+			}
+			"CBaseObject::GetConstructionMultiplier()"
+			{
+				// It calls "IsUsingReverseBuild()" and return -1.0 at first. Use function calls to find this.
+				"library" "server"
+				"linux"   "@_ZN11CBaseObject25GetConstructionMultiplierEv"
+				"windows" "\x55\x8B\xEC\x83\xEC\x0C\x53\x8B\xD9\x89\x5D\xF8"
+			}
+			"CObjectDispenser::CouldHealTarget"
+			{
+				// fourteen call in "CObjectDispenser::DispenseThink()"
+				"library"	"server"
+				"linux"		"@_ZN16CObjectDispenser15CouldHealTargetEP11CBaseEntity"
+				"windows"	"\x55\x8B\xEC\x56\x8B\x75\x08\x57\x8B\xF9\x8B\x87\x38\x01\x00\x00"
+			}
+			"CTFPlayer::RemoveAllObjects()"
+			{
+				// unique x-ref to string "object_removed"
+				"library"	"server"
+				"linux"		"@_ZN9CTFPlayer16RemoveAllObjectsEb"
+				"windows"	"\x55\x8B\xEC\x83\xEC\x08\x8B\xC1\x56\x89\x45\xF8"
+			}
+			"CTFGameRules::RemoveAllObjects()"
+			{
+				// unique x-ref to string "object_removed"
+				// Actually, it has the same struct as CTFPlayer::RemoveAllObjects().
+				// How to Distinguish: This is the one with fewer parameters.
+				// or... Longer signature is this function's signature.
+				"library"	"server"
+				"linux"		"@_ZN12CTFGameRules18RemoveAllBuildingsEb"
+				"windows"	"\x55\x8B\xEC\x51\x53\x33\xDB\x39\x1D\x2A\x2A\x2A\x2A\x0F\x8E\x2A\x2A\x2A\x2A\x56\x57\xEB\x2A\x8D\xA4\x24\x00\x00\x00\x00\x8B\xFF\x8B\x35\x2A\x2A\x2A\x2A"
+			}
+			"CBaseObject::GetSapper()"
+			{
+				// Direct way to get attached sapper
+				// It called twice in CBaseObject::Killed( const CTakeDamageInfo &info ). First call is this function.
+				"library"	"server"
+				"linux"		"@_ZN11CBaseObject9GetSapperEv"
+				"windows"	"\x80\xB9\x4C\x0A\x00\x00\x00"
+			}
+		}
+
+		"Offsets"
+		{
+			"CBaseObject::SetModel()"
+			{
+				"windows"	"26"
+				"linux"		"27"
+			}
+			"CBaseObject::OnGoActive()"
+			{
+				"windows"	"372"
+				"linux"		"374"
+			}
+			"CBaseObject::StartUpgrading()"
+			{
+				"windows"	"383"
+				"linux"		"384"
+			}
+			"CBaseObject::FinishUpgrading()"
+			{
+				"windows"	"384"
+				"linux"		"385"
+			}
+			"CBaseObject::GetMaxHealthForCurrentLevel()"
+			{
+				"windows"	"391"
+				"linux"		"392"
+			}
+			"CObjectDispenser::StartHealing()"
+			{
+				"windows"	"415"
+				"linux"		"429"
+			}
+			"CObjectDispenser::GetHealRate()"
+			{
+				"windows"	"414"
+				"linux"		"428"
+			}
+		}
+	}
+}

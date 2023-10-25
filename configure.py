@@ -2,21 +2,29 @@
 
 # plugin names, relative to `scripting/`
 plugins = [
-	'sample_plugin.sp',
+	'tf2bh.sp'
 ]
 
 # files to copy to builddir, relative to root
 # plugin names from previous list will be copied automatically
-copy_files = [ ]
+copy_files = [
+	'gamedata/tf2.baseobject.txt',
+	'scripting/tf2bh/dhooks.sp',
+	'scripting/tf2bh/natives.sp',
+	'scripting/tf2bh/utils.sp',
+	'scripting/include/tf2bh.inc'
+]
 
 # additional directories for sourcepawn include lookup
 # `scripting/include` is explicitly included
 include_dirs = [
-	# 'third_party/vendored'
+	'scripting/tf2bh',
+	'third_party/submodules',
+	'third_party/vendored'
 ]
 
 # required version of spcomp (presumably pinned to SM version)
-spcomp_min_version = (1, 9)
+spcomp_min_version = (1, 11)
 
 ########################
 # build.ninja script generation below.
