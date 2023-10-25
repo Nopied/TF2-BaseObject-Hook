@@ -375,10 +375,10 @@ MRESReturn DynDetour_CouldHealTargetPre(int building, DHookReturn ret, DHookPara
 		Call_PushCell(patient);
 		bool result = ret.Value;
 		Call_PushCellRef(result);
-		Action ret;
-		Call_Finish(ret);
+		Action act;
+		Call_Finish(act);
 
-		if (ret > Plugin_Continue) {
+		if (act > Plugin_Continue) {
 			ret.Value = result;
 			return MRES_Supercede;
 		}
